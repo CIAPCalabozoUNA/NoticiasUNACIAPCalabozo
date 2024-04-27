@@ -8,3 +8,8 @@
     vertical-align: baseline;
     box-sizing: border-box; /* Important for consistent box model */
   }
+
+  .no-default-styles {
+    all: unset;
+  }
+  
