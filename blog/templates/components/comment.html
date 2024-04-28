@@ -1,0 +1,18 @@
+{% load static %}
+<li class="depth-1">
+    <div class="comment-content">
+        <div class="avatar">
+            <img width="50" height="50" class="avatar" src="{% static 'images/avatars/default_avatar_image.png' %}" alt="">
+         </div>
+        <div class="comment-info">
+           <cite>{{full_name}}</cite>
+           <div class="comment-meta">
+               <p>{{ci}}</p>
+               <time class="comment-time">{{created_at}}</time>
+           </div>
+        </div>
+        <div class="comment-text">
+           <p>{{data}}</p>
+        </div>
+    </div>
+</li>

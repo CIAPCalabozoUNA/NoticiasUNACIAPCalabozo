@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from .models import Article
 
 # Create your views here.
 def index(request):
@@ -10,8 +11,13 @@ def index(request):
 
 def article(request, article_id):
     template = loader.get_template("pages/article.html")
+    article = Article.objects.get(pk=article_id)
+    comments = article.comment_set.all()
     context = {
-        'article_id':article_id
+        'article_id':article_id,
+        'article': article,
+        'comments_length': len(comments),
+        'comments_list': comments
     }
     return HttpResponse(template.render(context, request))
 
