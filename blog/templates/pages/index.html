@@ -1,5 +1,105 @@
 {% extends "abstract/base.html" %}
 
 {% block content %}
-    <p>Index Page.</p>
+    <section id="bricks">
+
+   	<div class="row masonry">
+
+   		<!-- brick-wrapper -->
+         <div class="bricks-wrapper">
+
+         	<div class="grid-sizer"></div>
+
+         	<div class="brick entry featured-grid animate-this">
+         		<div class="entry-content">
+         			<div id="featured-post-slider" class="flexslider">
+			   			<ul class="slides">
+                            {% for article in slides %}
+                                <li>
+                                    <div class="featured-post-slide">
+
+                                        <div class="post-background" style="background-image:url('{{article.related_image.image.url}}');"></div>
+
+                                        <div class="overlay"></div>			   		
+
+                                        <div class="post-content">
+                                            <ul class="entry-meta">
+                                                <li>{{article.created_at}}</li> 
+                                                <li><a href="#" >{{article.author.full_name}}</a></li>				
+                                            </ul>	
+
+                                            <h1 class="slide-title"><a href="{% url 'article' article.pk 0 %}" title="">{{article.name}}</a></h1> 
+                                        </div> 				   					  
+                                
+                                    </div>
+                                </li>
+                            {% endfor %}
+				   		</ul> <!-- end slides -->
+				   	</div> <!-- end featured-post-slider -->        			
+         		</div> <!-- end entry content -->         		
+         	</div>
+
+
+            {% for article in last_articles %}
+                <article class="brick entry format-standard animate-this">
+
+                    <div class="entry-thumb">
+                    <a href="{% url 'article' article.pk 0 %}" class="thumb-link">
+                        <img src="{{article.related_image.image.url}}" alt="">             
+                    </a>
+                    </div>
+    
+                    <div class="entry-text">
+                        <div class="entry-header">
+    
+                            <div class="entry-meta">
+                                <span class="cat-links">
+                                    <a href="#">{{article.article_type.name}}</a>          				
+                                </span>			
+                            </div>
+    
+                            <h1 class="entry-title"><a href="{% url 'article' article.pk 0 %}">{{article.name}}</a></h1>
+                            
+                        </div>
+                            <div class="entry-excerpt">
+                                {{article.resume}}
+                            </div>
+                    </div>
+    
+                </article>
+            {% endfor %}
+        
+         </div> <!-- end brick-wrapper --> 
+
+   	</div> <!-- end row -->
+
+   	{% comment %} <div class="row">
+   		<nav class="pagination">
+            {% if has_prev %}
+                <a  href="{% url 'index_with_page' prev_page %}" class="page-numbers prev">Prev</a>
+            {% else %}
+                <span class="page-numbers prev inactive">Prev</span>
+            {% endif %}
+            {% for i in number_of_pages %}
+                {% if i == page %}
+                    <span><a href="{% url 'index_with_page' i %}" class="page-numbers current">{{i}}</a></span>
+                {% else %}
+                    <a href="{% url 'index_with_page' i %}" class="page-numbers">{{i}}</a>
+                {% endif %} 
+            {% endfor %}
+
+            {% if has_next %}
+                <a href="{% url 'index_with_page' next_page %}" class="page-numbers next">Next</a>
+            {% else %}
+                <span class="page-numbers next inactive">Next</span>
+            {% endif %}
+		   	
+	    </nav>
+   	</div> {% endcomment %}
+
+    </section> <!-- end bricks -->
+
+   {% comment %} {% for article in  last_articles %}
+        {{article}}
+   {% endfor %} {% endcomment %}
 {% endblock %}

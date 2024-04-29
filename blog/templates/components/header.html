@@ -10,52 +10,59 @@
 
         <nav id="main-nav-wrap">
              <ul class="main-navigation sf-menu">
-                 <li class="current"><a href="index.html" title="">Home</a></li>									
-                 <li class="has-children">
-                     <a href="category.html" title="">Categories</a>
-                     <ul class="sub-menu">
-                     <li><a href="category.html">Wordpress</a></li>
-                     <li><a href="category.html">HTML</a></li>
-                     <li><a href="category.html">Photography</a></li>
-                     <li><a href="category.html">UI</a></li>
-                     <li><a href="category.html">Mockups</a></li>
-                     <li><a href="category.html">Branding</a></li>
-                  </ul>
-                 </li>
-                 <li class="has-children">
-                     <a href="single-standard.html" title="">Blog</a>
-                     <ul class="sub-menu">
-                     <li><a href="single-video.html">Video Post</a></li>
-                     <li><a href="single-audio.html">Audio Post</a></li>
-                     <li><a href="single-gallery.html">Gallery Post</a></li>
-                     <li><a href="single-standard.html">Standard Post</a></li>
-                  </ul>
-                 </li>
-                 <li><a href="style-guide.html" title="">Styles</a></li>
-                 <li><a href="about.html" title="">About</a></li>	
-                 <li><a href="contact.html" title="">Contact</a></li>										
+                {% if current_page == 'index' %}
+                    <li class="current"><a href="{% url 'index'%}" title="">Inicio</a></li>
+                {% else %}	
+                    <li><a href="{% url 'index'%}" title="">Inicio</a></li>
+                {% endif %}
+
+                {% if current_page == 'category_list' %}
+                    <li class="current has-children">
+                        <a href="#" title="">Categorias</a>
+                        <ul class="sub-menu">
+                            <li><a href="category.html">Noticias</a></li>
+                        </ul>
+                    </li>
+                {% else %}	
+                    <li class="has-children">
+                        <a href="#" title="">Categorias</a>
+                        <ul class="sub-menu">
+                            <li><a href="{% url 'category' 1 1%}">Noticias</a></li>
+                        </ul>
+                    </li>
+                {% endif %}
+
+                {% if current_page == 'article_list' %}
+                    <li class="current">
+                        <a title="" href="{% url 'article_list' 1%}">Articulos</a>
+                    </li>
+                {% else %}	
+                    <li>
+                        <a title="" href="{% url 'article_list' 1%}">Articulos</a>
+                    </li>
+                {% endif %}
+
+                {% if current_page == 'resource_list' %}
+                    <li class="current"><a href="{% url 'resource_list' 1%}" title="">Recursos</a></li>	
+                {% else %}	
+                    <li><a href="{% url 'resource_list' 1%}" title="">Recursos</a></li>	
+                {% endif %}
+
+                {% if current_page == 'about' %}
+                    <li class="current" ><a href="{% url 'about' %}" title="">Sobre Nosotros</a></li>
+                {% else %}	
+                    <li><a href="{% url 'about' %}" title="">Sobre Nosotros</a></li>
+                {% endif %}
+
+                {% if current_page == 'help_us' %}
+                    <li class="current"><a href="{% url 'help_us' %}" title="">¡Ayudanos!</a></li>										
+                {% else %}	
+                    <li><a href="{% url 'help_us' %}" title="">¡Ayudanos!</a></li>										
+                {% endif %}
+                								
+                
              </ul>
          </nav> <!-- end main-nav-wrap -->
-
-         <div class="search-wrap">
-             
-             <form role="search" method="get" class="search-form" action="#">
-                 <label>
-                     <span class="hide-content">Search for:</span>
-                     <input type="search" class="search-field" placeholder="Type Your Keywords" value="" name="s" title="Search for:" autocomplete="off">
-                 </label>
-                 <input type="submit" class="search-submit" value="Search">
-             </form>
-
-             <a href="#" id="close-search" class="close-btn">Close</a>
-
-         </div> <!-- end search wrap -->	
-
-         <div class="triggers">
-             <a class="search-trigger" href="#"><i class="fa fa-search"></i></a>
-             <a class="menu-toggle" href="#"><span>Menu</span></a>
-         </div> <!-- end triggers -->	
-        
     </div>     		
     
 </header> <!-- end header -->

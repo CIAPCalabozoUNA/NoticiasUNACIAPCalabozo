@@ -9,7 +9,7 @@
              <h4>Acerca de este sitio</h4>
 
                 <p>
-                    [Nombre del sitio web] es un proyecto comunitario creado por y para estudiantes, profesores y personal de UAP Calabozo de la UNA. Nuestro objetivo es proporcionar una plataforma centralizada para noticias, información académica y eventos relacionados con la universidad.
+                    Noticias UNA UAP Calabozo es un proyecto comunitario creado por y para estudiantes, profesores y personal de UAP Calabozo de la UNA. Nuestro objetivo es proporcionar una plataforma centralizada para noticias, información académica y eventos relacionados con la universidad.
                 </p>
 
            </div> <!-- end footer-info -->
@@ -19,11 +19,10 @@
                <h4>Enlaces</h4>
 
                <ul>
-                   <li><a href="#">About Us</a></li>
-                     <li><a href="#">Blog</a></li>
-                     <li><a href="#">FAQ</a></li>
-                     <li><a href="#">Terms</a></li>
-                     <li><a href="#">Privacy Policy</a></li>
+                   <li><a href="{% url 'index' %}">Inicio</a></li>
+                     <li><a href="{% url 'article_list' 1%}">Articulos</a></li>
+                     <li><a href="{% url 'resource_list' 1%}">Recuersos</a></li>
+                     <li><a href="{% url 'help_us' %}">¡Ayudanos!</a></li>
                  </ul>
 
            </div> <!-- end site-links -->  

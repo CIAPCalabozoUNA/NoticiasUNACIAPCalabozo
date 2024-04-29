@@ -1,0 +1,41 @@
+<div class="respond">
+
+    <h3>Deja un comentario</h3>
+
+    <form name="contactForm" id="commentForm" method="post" action="{% url 'create_comment'%}">
+        {% csrf_token %}
+        {% if comment_status == 1 %}
+            <div class="alert-box ss-success hideit">
+                <p>Tu mensaje ha sido enviado correctamente.</p>
+                <i class="fa fa-times close"></i>
+            </div><!-- /success -->
+        {% endif %}
+        {% if comment_status == 2 %}
+            <div class="alert-box ss-error hideit">
+                <p>Error. Tu mensaje no pudo ser enviado.</p>
+                <i class="fa fa-times close"></i>
+            </div><!-- /error -->
+        {% endif %}
+            
+        <fieldset>
+
+            <div class="form-field">
+                    <input name="full_name" type="text" id="cName" class="full-width" placeholder="Nombre Completo" value="">
+            </div>
+
+            <div class="form-field">
+                <input name="ci" type="text" id="cEmail" class="full-width" placeholder="Cedula de Identidad" value="">
+            </div>
+
+            <div class="message form-field">
+                <textarea name="data" id="cMessage" class="full-width" placeholder="Mensaje" ></textarea>
+            </div>
+
+            <input type="hidden" value="{{article_id}}" name="article"/>
+
+            <button type="submit" class="submit button-primary">Enviar</button>
+
+        </fieldset>
+    </form> <!-- Form End -->
+
+</div> <!-- Respond End -->

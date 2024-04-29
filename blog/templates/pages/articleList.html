@@ -1,5 +1,35 @@
 {% extends "abstract/base.html" %}
 
 {% block content %}
-    <p>Article List.</p>
+    <div id="content-wrap" class="styles">
+        <div class="row">
+
+            <div class="col-twelve">
+                <h1>Todos los articulos.</h1>
+                <p class="lead">Encuentra todos los articulos ordenados por fecha de publicacion.</p>   			
+            </div>
+        </div>
+        <div class="row">
+            <nav class="pagination">
+                {% if has_prev %}
+                    <a  href="{% url 'article_list' prev_page %}" class="page-numbers prev">Prev</a>
+                {% else %}
+                    <span class="page-numbers prev inactive">Prev</span>
+                {% endif %}
+                {% for i in number_of_pages %}
+                    {% if i == page %}
+                        <span><a href="{% url 'article_list' i %}" class="page-numbers current">{{i}}</a></span>
+                    {% else %}
+                        <a href="{% url 'article_list' i %}" class="page-numbers">{{i}}</a>
+                    {% endif %} 
+                {% endfor %}
+
+                {% if has_next %}
+                    <a href="{% url 'article_list' next_page %}" class="page-numbers next">Next</a>
+                {% else %}
+                    <span class="page-numbers next inactive">Next</span>
+                {% endif %}
+            </nav>
+        </div>   
+    </div>
 {% endblock %}
