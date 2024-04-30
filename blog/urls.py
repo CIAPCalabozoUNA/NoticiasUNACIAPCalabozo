@@ -9,7 +9,7 @@ urlpatterns = [
     path('category/<int:category>/<int:page>/', views.category, name= 'category'),
     path('about/', views.about , name= 'about'),
     path('help_us/', views.helpUs , name= 'help_us'),
-    path('resource/<int:resourse_id>/', views.resource , name= 'resource'),
+    path('resource/<int:resource_id>/', views.resource , name= 'resource'),
     path('author/<int:author_id>/', views.author , name= 'author'),
     path('create_comment/', views.create_comment, name = 'create_comment')
 ]

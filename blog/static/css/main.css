@@ -155,6 +155,7 @@ p.lead {
 	font-family: 'roboto-light', sans-serif;
 	font-size: 2.4rem;
 	line-height: 1.8;
+	margin-bottom: 5rem;
 	color: #373737;
 	color: #666666;
 }
@@ -2693,10 +2694,9 @@ footer ul li {
  * ------------------------------------------------------------------- */
 .blog-single .entry-meta {
 	font-family: "muli-regular", sans-serif;
-	font-size: 1.5rem;
 	list-style: none;
 	margin-left: 0;
-	margin-bottom: 5.4rem;
+	margin-bottom: 2rem;
 	color: #999999;
 }
 .blog-single .entry-meta a,
@@ -2746,7 +2746,8 @@ footer ul li {
 }
 
 .blog-single .author-profile {
-	margin-top: 9rem;
+	margin-top: 5rem;
+	margin-bottom: 5rem;
 	padding-left: 9rem;
 	position: relative;
 }
@@ -2869,6 +2870,12 @@ footer ul li {
 .comments-wrap {
 	background-color: rgba(0, 0, 0, 0.08);
 	padding: 7.8rem 0 9rem;
+}
+
+.comments-wrap2 {
+	background-color: rgba(0, 0, 0, 0.08);
+	padding: 8px;
+	margin-top: 5rem;
 }
 
 /* comments

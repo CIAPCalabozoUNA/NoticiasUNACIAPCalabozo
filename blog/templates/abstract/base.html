@@ -30,8 +30,9 @@
      
     </head>
     <body id="top">
-        
-        {% include "components/header.html" %}
+
+        {% block header %}
+        {% endblock %}
 
         <main>
             {% block content %}

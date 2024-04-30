@@ -2,10 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import loader
 from django.urls import reverse
-from .models import Article, Comment, ArticleType
+from .models import Article, Comment, ArticleType, Resource
 from .forms import CommentForm
-from .utils import get_number_of_pages
+from .utils import get_number_of_pages, get_all_categories
 from django.core.paginator import Paginator
+
+categories = get_all_categories()
 
 # Create your views here.
 def index(request):
@@ -19,6 +21,7 @@ def index(request):
     
     slides = Article.objects.filter(article_type = 1).order_by('-created_at')[:5]
     context = {
+        'categories':categories,
         'current_page': 'index',
         'last_articles':page_obj,
         'slides':slides,
@@ -27,13 +30,16 @@ def index(request):
 
 
 def article(request, article_id, comment_status):
+
     template = loader.get_template("pages/article.html")
     article = get_object_or_404(Article, pk = article_id)
     comments = article.comment_set.all()
     context = {
+        'categories':categories,
         'current_page': 'article_list',
         'article_id':article_id,
         'article': article,
+        'resources':article.resources.all(),
         'comments_length': len(comments),
         'comments_list': comments,
         'comment_status': comment_status,
@@ -41,7 +47,7 @@ def article(request, article_id, comment_status):
     return HttpResponse(template.render(context, request))
 
 def articleList(request, page):
-    
+
     # template
     template = loader.get_template("pages/articleList.html")
 
@@ -56,6 +62,7 @@ def articleList(request, page):
     number_of_pages = paginator.num_pages
 
     context = {
+        'categories':categories,
         'current_page': 'article_list',
         'article_page':page_obj,
         'page':page,
@@ -69,20 +76,22 @@ def articleList(request, page):
     return HttpResponse(template.render(context, request))
 
 def resourceList(request, page):
+
      # template
-    template = loader.get_template("pages/articleList.html")
+    template = loader.get_template("pages/resourceList.html")
 
     # get all the articles
 
-    all_articles =  Article.objects.order_by("-created_at")
+    all_resources =  Resource.objects.order_by("-created_at")
 
     # paginator
 
-    paginator = Paginator(all_articles, 25)
+    paginator = Paginator(all_resources, 25)
     page_obj = paginator.get_page(page)
     number_of_pages = paginator.num_pages
 
     context = {
+        'categories':categories,
         'current_page': 'resource_list',
         'article_page':page_obj,
         'page':page,
@@ -96,7 +105,11 @@ def resourceList(request, page):
     return HttpResponse(template.render(context, request))
 
 def category(request, category, page):
-    template = loader.get_template("pages/articleList.html")
+
+    #categoriers
+
+    template = loader.get_template("pages/category.html")
+    category_object = ArticleType.objects.get(pk=category)
 
     # get all the articles
 
@@ -109,7 +122,9 @@ def category(request, category, page):
     number_of_pages = paginator.num_pages
 
     context = {
-        'current_page': 'category',
+        'categories':categories,
+        'name': category_object.name,
+        'current_page': 'category_list',
         'article_page':page_obj,
         'page':page,
         'number_of_pages': get_number_of_pages(number_of_pages),
@@ -124,6 +139,7 @@ def category(request, category, page):
 def about(request):
     template = loader.get_template("pages/about.html")
     context = {
+        'categories':categories,
         'current_page': 'about',
     }
     return HttpResponse(template.render(context, request))
@@ -131,13 +147,15 @@ def about(request):
 def helpUs(request):
     template = loader.get_template("pages/helpUs.html")
     context = {
-         'current_page': 'help_us',
+        'categories':categories,
+        'current_page': 'help_us',
     }
     return HttpResponse(template.render(context, request))
 
 def resource(request, resource_id):
     template = loader.get_template("pages/resource.html")
     context = {
+        'categories':categories,
         'current_page': 'resource_list',
         'resource_id': resource_id
     }
@@ -146,6 +164,7 @@ def resource(request, resource_id):
 def author(request, author_id):
     template = loader.get_template("pages/author.html")
     context = {
+        'categories':categories,
         'current_page': 'about',
         'author_id': author_id
     }

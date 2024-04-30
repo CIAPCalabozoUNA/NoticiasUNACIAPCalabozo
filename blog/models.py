@@ -38,6 +38,8 @@ class Resource(models.Model):
     description =  models.CharField(max_length=50, null = True, blank = True)
     related_image = models.ForeignKey(Image, on_delete=models.CASCADE, null = True, blank = True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE,  null = True, blank = True )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     class Meta:
         verbose_name = "Article Resource"
         verbose_name_plural = "Article Resources"

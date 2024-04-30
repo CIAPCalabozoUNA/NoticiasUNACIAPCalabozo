@@ -1,5 +1,7 @@
 {% extends "abstract/base.html" %}
-
+{% block header %}
+    {% include "components/header.html" with categories=categories %}
+{% endblock header %}
 {% block content %}
     <p>Author page.</p>
 {% endblock %}

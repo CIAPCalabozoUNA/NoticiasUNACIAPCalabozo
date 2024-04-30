@@ -1,5 +1,9 @@
 {% extends "abstract/base.html" %}
 
+{% block header %}
+    {% include "components/header.html" with categories=categories %}
+{% endblock header %}
+
 {% block content %}
     <section id="content-wrap" class="blog-single">
         <div class="row">
@@ -24,7 +28,33 @@
  
                         <p class="lead">{{article.resume}}</p> 
  
-                        <p>{{article.content}}</p>
+                        <p>{{article.content|linebreaks}}</p>
+
+                        {% if resources %}
+                            <div class="row add-bottom">
+
+                                <div class="col-twelve">
+                    
+                                    <h3>Recursos</h3>
+                                    <div class="table-responsive">
+                    
+                                        <table>
+                                            <tbody>
+                                                {% for resource in resources  %}
+                                                    <tr>
+                                                        <td>{{resource.name}}</td>
+                                                        <td href="{% url 'resource' resource.pk %}">
+                                                            <span><a href="{% url 'resource' resource.pk %}" >Link</a></span>
+                                                        </td>					    
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>     		
+                                </div>
+                                
+                            </div> <!-- end row -->
+                        {% endif %}
  
                         <div class="author-profile">
                             <img src="{{article.author.avatar.url}}" alt="">
@@ -37,9 +67,6 @@
  
                     </div> <!-- end entry-primary -->		  			   
  
-                    <div class="pagenav group">
-                          	   
-                    </div>
  
                  </article>
              </div> <!-- end col-twelve -->

@@ -15,19 +15,22 @@
                 {% else %}	
                     <li><a href="{% url 'index'%}" title="">Inicio</a></li>
                 {% endif %}
-
                 {% if current_page == 'category_list' %}
                     <li class="current has-children">
                         <a href="#" title="">Categorias</a>
                         <ul class="sub-menu">
-                            <li><a href="category.html">Noticias</a></li>
+                        {% for category in categories  %}
+                            <li><a href="{% url 'category' category.pk 1%}">{{category.name}}</a></li>
+                        {% endfor %}
                         </ul>
                     </li>
                 {% else %}	
                     <li class="has-children">
                         <a href="#" title="">Categorias</a>
                         <ul class="sub-menu">
-                            <li><a href="{% url 'category' 1 1%}">Noticias</a></li>
+                            {% for category in categories  %}
+                                <li><a href="{% url 'category' category.pk 1%}">{{category.name}}</a></li>
+                            {% endfor %}
                         </ul>
                     </li>
                 {% endif %}
