@@ -158,7 +158,11 @@ def helpUs(request):
 
 def resource(request, resource_id):
     template = loader.get_template("pages/resource.html")
+
+    resource_object = Resource.objects.get(pk = resource_id)
+
     context = {
+        'resource_object':resource_object,
         'categories':categories,
         'current_page': 'resource_list',
         'resource_id': resource_id

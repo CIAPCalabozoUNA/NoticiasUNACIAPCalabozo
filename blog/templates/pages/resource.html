@@ -4,5 +4,49 @@
 {% endblock header %}
 
 {% block content %}
-    <p>Resource.</p>
+<section id="content-wrap" class="blog-single">
+    <div class="row">
+        <div class="col-twelve">
+
+            <article class="format-standard">  
+
+                {% if resource_object.related_image %}
+                    <div class="content-media">
+                        <div class="post-thumb">
+                            <img src="{{resource_object.related_image.image.url}}"> 
+                        </div>  
+                    </div>
+                {% endif %}
+
+                <div class="primary-content">
+
+                    <h1 class="page-title">{{resource_object.name}}</h1>	
+
+                    <ul class="entry-meta">
+                        <li class="date">{{resource_object.created_at}}</li>						
+                    </ul>		
+
+                    <p class="lead">{{resource_object.description}}</p>
+
+                    <a href="{{resource_object.file.url}}">Enlace de descarga</a>
+
+                    {% if resource_object.author %}
+                        <div class="author-profile">
+                            <img src="{{resource_object.author.avatar.url}}" alt="">
+    
+                            <div class="about">
+                                <h4><a href="#">{{resource_object.author.full_name}}</a></h4>
+                                <p>{{resource_object.author.resume}}</p>
+                            </div>
+                        </div> <!-- end author-profile -->						
+    
+                    {% endif %}
+
+                </div> <!-- end entry-primary -->		  			   
+
+
+             </article>
+         </div> <!-- end col-twelve -->
+    </div> <!-- end row -->
+</section> 
 {% endblock %}
