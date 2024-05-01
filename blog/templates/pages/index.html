@@ -45,7 +45,6 @@
 
             {% for article in last_articles %}
                 <article class="brick entry format-standard animate-this">
-
                     <div class="entry-thumb">
                     <a href="{% url 'article' article.pk 0 %}" class="thumb-link">
                         <img src="{{article.related_image.image.url}}" alt="">             
@@ -71,6 +70,7 @@
     
                 </article>
             {% endfor %}
+        
         
          </div> <!-- end brick-wrapper --> 
 

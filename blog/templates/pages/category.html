@@ -12,23 +12,53 @@
                 <p class="lead">Publicacaciones de la categoria.</p>   			
             </div>
         </div>
+
+        {% if  results_len > 0 %}
+            <div class="row">
+                {% for article  in  article_page %}
+                <div class="col-twelve">
+                    <section class="articulo">
+                    <div class="imagen">
+                        <img src="{{article.related_image.image.url}}"> 
+                    </div>
+                    <div class="contenido">
+                        <h2><a href="{% url 'article' article.pk 0 %}">{{article.name}}</a></h2>
+                        <p class="resume-text">{{article.resume}}</p> 
+                        <p class="date-text">{{article.created_at}}</p>			
+                    </div>
+                    </section>
+                </div>
+                {% endfor %}
+            </div>
+            
+        {% else %}
+            <div class="row">
+                <div class="col-twelve">
+                    <div class="alert-box ss-notice hideit">
+                        <p>No hay resultados para esta busqueda.</p>
+                        <i class="fa fa-times close"></i>
+                    </div><!-- /notice -->
+                </div>
+            </div>
+        {% endif %} 
+       
         <div class="row">
             <nav class="pagination">
                 {% if has_prev %}
-                    <a  href="{% url 'article_list' prev_page %}" class="page-numbers prev">Prev</a>
+                    <a  href="{% url 'category' category_id prev_page %}" class="page-numbers prev">Prev</a>
                 {% else %}
                     <span class="page-numbers prev inactive">Prev</span>
                 {% endif %}
                 {% for i in number_of_pages %}
                     {% if i == page %}
-                        <span><a href="{% url 'article_list' i %}" class="page-numbers current">{{i}}</a></span>
+                        <span><a href="{% url 'category' category_id i %}" class="page-numbers current">{{i}}</a></span>
                     {% else %}
-                        <a href="{% url 'article_list' i %}" class="page-numbers">{{i}}</a>
+                        <a href="{% url 'category' category_id i %}" class="page-numbers">{{i}}</a>
                     {% endif %} 
                 {% endfor %}
 
                 {% if has_next %}
-                    <a href="{% url 'article_list' next_page %}" class="page-numbers next">Next</a>
+                    <a href="{% url 'category' category_id next_page %}" class="page-numbers next">Next</a>
                 {% else %}
                     <span class="page-numbers next inactive">Next</span>
                 {% endif %}

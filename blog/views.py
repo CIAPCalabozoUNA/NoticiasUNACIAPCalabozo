@@ -70,7 +70,8 @@ def articleList(request, page):
         'has_next': page < number_of_pages,
         'has_prev': page > 1,
         'next_page': page + 1,
-        'prev_page': page - 1
+        'prev_page': page - 1,
+        'results_len': paginator.object_list.count()
     }
 
     return HttpResponse(template.render(context, request))
@@ -93,13 +94,14 @@ def resourceList(request, page):
     context = {
         'categories':categories,
         'current_page': 'resource_list',
-        'article_page':page_obj,
+        'resource_page':page_obj,
         'page':page,
         'number_of_pages': get_number_of_pages(number_of_pages),
         'has_next': page < number_of_pages,
         'has_prev': page > 1,
         'next_page': page + 1,
-        'prev_page': page - 1
+        'prev_page': page - 1,
+        'results_len': paginator.object_list.count()
     }
 
     return HttpResponse(template.render(context, request))
@@ -113,7 +115,7 @@ def category(request, category, page):
 
     # get all the articles
 
-    all_articles =  Article.objects.order_by("-created_at")
+    all_articles =  Article.objects.order_by("-created_at").filter(article_type=category)
 
     # paginator
 
@@ -124,6 +126,7 @@ def category(request, category, page):
     context = {
         'categories':categories,
         'name': category_object.name,
+        'category_id': category_object.pk,
         'current_page': 'category_list',
         'article_page':page_obj,
         'page':page,
@@ -131,7 +134,8 @@ def category(request, category, page):
         'has_next': page < number_of_pages,
         'has_prev': page > 1,
         'next_page': page + 1,
-        'prev_page': page - 1
+        'prev_page': page - 1,
+        'results_len': paginator.object_list.count()
     }
 
     return HttpResponse(template.render(context, request))

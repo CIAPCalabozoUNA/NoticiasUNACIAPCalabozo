@@ -6,12 +6,39 @@
 {% block content %}
     <div id="content-wrap" class="styles">
         <div class="row">
-
             <div class="col-twelve">
                 <h1>Todos los articulos.</h1>
                 <p class="lead">Encuentra todos los articulos ordenados por fecha de publicacion.</p>   			
             </div>
         </div>
+        {% if  results_len > 0 %}
+            <div class="row">
+                {% for article  in  article_page %}
+                <div class="col-twelve">
+                    <section class="articulo">
+                    <div class="imagen">
+                        <img src="{{article.related_image.image.url}}"> 
+                    </div>
+                    <div class="contenido">
+                        <h2><a href="{% url 'article' article.pk 0 %}">{{article.name}}</a></h2>
+                        <p class="resume-text">{{article.resume}}</p> 
+                        <p class="date-text">{{article.created_at}}</p>			
+                    </div>
+                    </section>
+                </div>
+                {% endfor %}
+            </div>
+            
+        {% else %}
+            <div class="row">
+                <div class="col-twelve">
+                    <div class="alert-box ss-notice hideit">
+                        <p>No hay resultados para esta busqueda.</p>
+                        <i class="fa fa-times close"></i>
+                    </div><!-- /notice -->
+                </div>
+            </div>
+        {% endif %} 
         <div class="row">
             <nav class="pagination">
                 {% if has_prev %}
@@ -33,6 +60,6 @@
                     <span class="page-numbers next inactive">Next</span>
                 {% endif %}
             </nav>
-        </div>   
+        </div>  
     </div>
 {% endblock %}
