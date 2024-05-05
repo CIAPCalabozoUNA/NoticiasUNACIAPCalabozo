@@ -21,3 +21,46 @@ Si estás interesado en formar parte del equipo de Noticias UNA CIAP Calabozo, n
 - ciapcalabozo@outlook.com
 
 ¡Agradecemos de antemano tu interés en apoyar a Noticias UNA CIAP Calabozo! Juntos podemos construir un espacio informativo valioso para la comunidad universitaria.
+
+## Requerimientos de desarrollo
+
+Para ejecutar el proyecto en ambiente de desarrollo son necesarias las siguientes dependencias: 
+
+- Git.
+- Docker Destop.
+- GitBash (solo para usuarios de Windows)
+
+## Pasos para la instalcion
+
+**1. Dirigete al directorio de tu preferencia usando la consola:**
+
+```bash
+cd "/directorio/de/tu/preferencia"
+```
+
+**2. Clona el repositorio:**
+
+```bash
+git clone git@github.com:CIAPCalabozoUNA/NoticiasUNACIAPCalabozo.git
+```
+
+**2. Crea un archivo llamado .env.dev para las variables de entorno:**
+```env
+HOST_IP=""127.0.0.1""
+POSTGRES_NAME="el valor de tu eleccion"
+POSTGRES_USER="el valor de tu eleccion"
+POSTGRES_PASSWORD="el valor de tu eleccion"
+DB_HOST="127.0.0.1"
+SQL_PORT_="5432"
+ADMIN_USER="el valor de tu eleccion"
+PASSWORD="el valor de tu eleccion"
+```
+
+**2. Ejecuta el archivo 'start.sh':**
+
+```bash
+./start.sh
+```
+**Nota:**
+
+- Este codigo solo ha sido probado en los sitemas operativos Linux y MacOS. El uso de Docker en el proyecto puede facilitar la ejecucion del proyecto pero no esta garantizada su correcta ejecucion. En caso de algun inconveniente no dudes en iniciar un issue.
