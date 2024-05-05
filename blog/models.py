@@ -75,7 +75,8 @@ class Article(models.Model):
     resume = models.CharField(max_length=200, default = "Default Resume")
     author = models.ForeignKey(Author, on_delete=models.CASCADE,  blank =  True, null = True)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True, blank =  True)
+    views = models.IntegerField(default=0)
     class Meta:
         verbose_name = "article"
         verbose_name_plural = "articles"

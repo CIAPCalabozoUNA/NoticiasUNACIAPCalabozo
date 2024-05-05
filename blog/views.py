@@ -34,6 +34,8 @@ def article(request, article_id, comment_status):
     template = loader.get_template("pages/article.html")
     article = get_object_or_404(Article, pk = article_id)
     comments = article.comment_set.all()
+    article.views =  article.views + 1
+    article.save()
     context = {
         'categories':categories,
         'current_page': 'article_list',
@@ -44,6 +46,7 @@ def article(request, article_id, comment_status):
         'comments_list': comments,
         'comment_status': comment_status,
     }
+
     return HttpResponse(template.render(context, request))
 
 def articleList(request, page):
